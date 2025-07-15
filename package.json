@@ -1,0 +1,32 @@
+{
+  "name": "ai-agent-bun",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "bun run src/index.ts",
+    "dev": "bun --watch src/index.ts",
+    "seed": "bun run src/seed-database.ts",
+    "build": "bun build src/index.ts --outdir dist",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/express": "^5.0.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@langchain/cohere": "^0.3.4",
+    "@langchain/google-genai": "^0.2.14",
+    "@langchain/langgraph": "^0.3.7",
+    "@langchain/langgraph-checkpoint-mongodb": "^0.0.6",
+    "@langchain/mongodb": "^0.1.0",
+    "dotenv": "^17.2.0",
+    "express": "^5.1.0",
+    "langchain": "^0.3.29",
+    "mongodb": "^6.17.0",
+    "zod": "^4.0.5"
+  }
+}
