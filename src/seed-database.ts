@@ -7,6 +7,7 @@ import { z } from "zod";
 import dotenv from "dotenv";
 import { EmployeeSchema } from "./schema";
 import type { TEmployee } from "./schema";
+import { readTxtFile } from "../utils/read-text-file";
 dotenv.config();
 
 
@@ -20,8 +21,8 @@ const llm = new ChatGoogleGenerativeAI({
 const parser = StructuredOutputParser.fromZodSchema(z.array(EmployeeSchema));
 
 const generateSyntheticData = async (): Promise<TEmployee[]> => {
-    const prompt = `You are a helpful assistant that generates employee data. Generate 10 fictional employee records. Each record should include the following fields: employee_id, first_name, last_name, date_of_birth, address, contact_details, job_details, work_location, reporting_manager, skills, performance_reviews, benefits, emergency_contact, notes. Ensure variety in the data and realistic values.
-    ${parser.getFormatInstructions()}`;
+
+    const prompt = (await readTxtFile("src/prompts/prompt-1.txt")).concat(`${parser.getFormatInstructions()}`);
 
     console.log("Generating synthetic data...");
 
